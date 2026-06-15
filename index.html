@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afzal Greens — Premium Fresh Greens, Delivered Daily</title>
+<meta name="description" content="Afzal Greens delivers premium fresh kale, basil, rocket, lettuce and herbs to homes, restaurants and supermarkets across Islamabad & Rawalpindi.">
+
+<!-- Google Fonts: Fraunces (display) + Inter (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     DESIGN TOKENS
+     Change these values to re-theme the whole site.
+     ============================================================ */
+  :root{
+    --canvas: #FAF9F6;     /* page background, warm off-white */
+    --white:  #FFFFFF;
+    --pine:   #1F3D2B;     /* deep pine green - header, footer, text */
+    --pine-dark: #16301F;
+    --leaf:   #4F8A5B;     /* fresh leaf green - buttons, price, accents */
+    --leaf-light: #6EA978;
+    --sage:   #EAF2E9;     /* soft sage - alternate section background */
+    --ink:    #26352B;     /* body text colour */
+    --shadow: 0 10px 30px rgba(31, 61, 43, 0.08);
+    --shadow-soft: 0 6px 18px rgba(31, 61, 43, 0.10);
+    --radius: 16px;
+    --container: 1180px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'Inter', system-ui, sans-serif;
+    background:var(--canvas);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces', Georgia, serif;
+    color:var(--pine);
+    line-height:1.15;
+    font-weight:600;
+  }
+
+  img{ max-width:100%; display:block; }
+
+  a{ color:inherit; }
+
+  .container{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--leaf);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  .site-header{
+    position:sticky;
+    top:0;
+    z-index:200;
+    background:var(--white);
+    box-shadow:0 2px 14px rgba(31,61,43,0.06);
+  }
+
+  .header-inner{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:12px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+  }
+
+  .brand img{
+    height:46px;
+    width:46px;
+    object-fit:cover;
+    border-radius:12px;
+    box-shadow:var(--shadow-soft);
+  }
+
+  .brand-name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.25rem;
+    color:var(--pine);
+    letter-spacing:0.01em;
+  }
+
+  .brand-name span{
+    display:block;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:0.65rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--leaf);
+    margin-top:2px;
+  }
+
+  .main-nav{
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
+
+  .main-nav a{
+    text-decoration:none;
+    font-weight:500;
+    color:var(--ink);
+    font-size:0.96rem;
+    position:relative;
+    padding:6px 2px;
+  }
+
+  .main-nav a::after{
+    content:'';
+    position:absolute;
+    left:0; bottom:0;
+    width:0%;
+    height:2px;
+    background:var(--leaf);
+    transition:width 0.25s ease;
+  }
+
+  .main-nav a:hover::after{ width:100%; }
+
+  .header-actions{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .nav-toggle{
+    display:none;
+    border:none;
+    background:none;
+    cursor:pointer;
+    padding:8px;
+    color:var(--pine);
+  }
+
+  /* Header cart trigger */
+  .cart-trigger{
+    position:relative;
+    border:1.5px solid var(--sage);
+    background:var(--white);
+    border-radius:50%;
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:border-color 0.2s, transform 0.15s;
+  }
+
+  .cart-trigger:hover{
+    border-color:var(--leaf);
+    transform:translateY(-2px);
+  }
+
+  .cart-trigger svg{ width:20px; height:20px; stroke:var(--pine); }
+
+  .cart-badge{
+    position:absolute;
+    top:-6px;
+    right:-6px;
+    background:var(--leaf);
+    color:var(--white);
+    font-size:0.7rem;
+    font-weight:700;
+    min-width:20px;
+    height:20px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 4px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    position:relative;
+    min-height:78vh;
+    display:flex;
+    align-items:center;
+    background:
+      linear-gradient(100deg, rgba(22,48,31,0.82) 0%, rgba(22,48,31,0.45) 45%, rgba(22,48,31,0.15) 100%),
+      url('https://i.ibb.co/svGkgBR5/banner.jpg') center/cover no-repeat;
+    color:var(--white);
+  }
+
+  .hero-content{
+    max-width:560px;
+    padding:90px 24px 80px;
+  }
+
+  .hero-eyebrow{
+    display:inline-block;
+    font-size:0.78rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--sage);
+    margin-bottom:18px;
+    border:1px solid rgba(255,255,255,0.35);
+    padding:6px 14px;
+    border-radius:999px;
+  }
+
+  .hero h1{
+    color:var(--white);
+    font-size:clamp(2.4rem, 5.5vw, 3.6rem);
+    margin-bottom:18px;
+  }
+
+  .hero p{
+    font-size:1.05rem;
+    color:rgba(255,255,255,0.88);
+    margin-bottom:30px;
+    max-width:460px;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    padding:15px 30px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    text-decoration:none;
+  }
+
+  .btn-primary{
+    background:var(--leaf);
+    color:var(--white);
+    box-shadow:0 10px 26px rgba(79,138,91,0.4);
+  }
+
+  .btn-primary:hover{
+    background:var(--leaf-light);
+    transform:translateY(-2px);
+    box-shadow:0 14px 30px rgba(79,138,91,0.45);
+  }
+
+  /* Scalloped "leaf edge" divider — signature motif */
+  .scallop{
+    display:block;
+    width:100%;
+    height:34px;
+    line-height:0;
+  }
+
+  .scallop svg{ width:100%; height:100%; display:block; }
+
+  /* ============================================================
+     SECTION COMMON
+     ============================================================ */
+  .section{
+    padding:80px 0;
+  }
+
+  .section.alt{
+    background:var(--sage);
+  }
+
+  .section-head{
+    max-width:640px;
+    margin:0 auto 50px;
+    text-align:center;
+  }
+
+  .section-head .kicker{
+    display:block;
+    font-size:0.78rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--leaf);
+    margin-bottom:10px;
+  }
+
+  .section-head h2{
+    font-size:clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom:12px;
+  }
+
+  .section-head p{
+    color:#5B6B5F;
+    font-size:1rem;
+  }
+
+  /* ============================================================
+     PRODUCT GRID
+     ============================================================ */
+  .product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:26px;
+  }
+
+  .product-card{
+    background:var(--white);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow-soft);
+    display:flex;
+    flex-direction:column;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .product-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+  }
+
+  .product-media{
+    position:relative;
+    aspect-ratio: 4 / 3;
+    overflow:hidden;
+    background:var(--sage);
+  }
+
+  .product-media img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  /* Signature element: a tied "harvest tag" on every product photo */
+  .harvest-tag{
+    position:absolute;
+    top:14px;
+    left:-6px;
+    background:var(--leaf);
+    color:var(--white);
+    font-family:'Fraunces', serif;
+    font-size:0.66rem;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    line-height:1.25;
+    padding:7px 12px 7px 16px;
+    border-radius:2px 10px 10px 2px;
+    transform:rotate(-7deg);
+    box-shadow:0 6px 14px rgba(22,48,31,0.28);
+  }
+
+  .harvest-tag::before{
+    content:'';
+    position:absolute;
+    left:5px; top:50%;
+    width:5px; height:5px;
+    background:var(--white);
+    border-radius:50%;
+    transform:translateY(-50%);
+  }
+
+  .product-body{
+    padding:18px 18px 22px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    flex:1;
+  }
+
+  .product-body h3{
+    font-size:1.12rem;
+  }
+
+  .product-body .unit{
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--leaf);
+    font-weight:700;
+  }
+
+  .product-body .desc{
+    font-size:0.88rem;
+    color:#5B6B5F;
+    flex:1;
+    margin-top:4px;
+  }
+
+  .product-body .price{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.25rem;
+    color:var(--leaf);
+    margin-top:6px;
+  }
+
+  /* Quantity stepper (used on product cards AND inside the cart drawer) */
+  .qty-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:10px;
+  }
+
+  .qty-row.small{ margin-top:8px; gap:8px; }
+
+  .qty-btn{
+    width:34px; height:34px;
+    border-radius:50%;
+    border:1.5px solid var(--sage);
+    background:var(--white);
+    color:var(--pine);
+    font-size:1.1rem;
+    font-weight:700;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:border-color 0.2s, background 0.2s, color 0.2s;
+    line-height:1;
+  }
+
+  .qty-row.small .qty-btn{ width:28px; height:28px; font-size:1rem; }
+
+  .qty-btn:hover{
+    border-color:var(--leaf);
+    background:var(--leaf);
+    color:var(--white);
+  }
+
+  .qty-input{
+    width:52px;
+    text-align:center;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    padding:7px 4px;
+    border:1.5px solid var(--sage);
+    border-radius:8px;
+    color:var(--ink);
+    background:var(--white);
+    -moz-appearance:textfield;
+  }
+
+  .qty-row.small .qty-input{ width:42px; padding:5px 4px; font-size:0.88rem; }
+
+  .qty-input::-webkit-outer-spin-button,
+  .qty-input::-webkit-inner-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+  }
+
+  .add-cart-btn{
+    margin-top:14px;
+    width:100%;
+    padding:12px 0;
+    border:none;
+    border-radius:10px;
+    background:var(--pine);
+    color:var(--white);
+    font-weight:600;
+    font-size:0.92rem;
+    cursor:pointer;
+    transition:background 0.2s ease, transform 0.12s ease;
+  }
+
+  .add-cart-btn:hover{ background:var(--leaf); }
+
+  .add-cart-btn.added{
+    animation: addPulse 0.55s ease;
+    background:var(--leaf);
+  }
+
+  @keyframes addPulse{
+    0%{ transform:scale(1); }
+    35%{ transform:scale(0.94); }
+    65%{ transform:scale(1.04); }
+    100%{ transform:scale(1); }
+  }
+
+  /* ============================================================
+     FLOATING CART BUTTON
+     ============================================================ */
+  .floating-cart{
+    position:fixed;
+    bottom:26px;
+    right:26px;
+    z-index:250;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:var(--leaf);
+    border:none;
+    box-shadow:0 12px 28px rgba(31,61,43,0.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:transform 0.2s ease, background 0.2s ease;
+  }
+
+  .floating-cart:hover{
+    background:var(--leaf-light);
+    transform:translateY(-3px) scale(1.04);
+  }
+
+  .floating-cart svg{ width:24px; height:24px; stroke:var(--white); }
+
+  .floating-cart .cart-badge{
+    top:-4px; right:-4px;
+    background:var(--pine);
+  }
+
+  /* ============================================================
+     TOAST (add-to-cart confirmation)
+     ============================================================ */
+  .toast{
+    position:fixed;
+    bottom:96px;
+    right:26px;
+    z-index:260;
+    background:var(--pine);
+    color:var(--white);
+    font-size:0.88rem;
+    font-weight:500;
+    padding:12px 20px;
+    border-radius:999px;
+    box-shadow:0 10px 24px rgba(22,48,31,0.35);
+    opacity:0;
+    transform:translateY(12px);
+    transition:opacity 0.25s ease, transform 0.25s ease;
+    pointer-events:none;
+  }
+
+  .toast.show{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ============================================================
+     CART DRAWER
+     ============================================================ */
+  .cart-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(22,48,31,0.4);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.3s ease;
+    z-index:290;
+  }
+
+  .cart-overlay.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .cart-drawer{
+    position:fixed;
+    top:0; right:0;
+    height:100%;
+    width:400px;
+    max-width:92vw;
+    background:var(--white);
+    z-index:300;
+    transform:translateX(100%);
+    transition:transform 0.35s cubic-bezier(.22,.61,.36,1);
+    display:flex;
+    flex-direction:column;
+    box-shadow:-12px 0 40px rgba(22,48,31,0.18);
+  }
+
+  .cart-drawer.open{ transform:translateX(0); }
+
+  .cart-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 24px;
+    border-bottom:1px solid var(--sage);
+  }
+
+  .cart-header h2{ font-size:1.3rem; }
+
+  .cart-close{
+    background:none;
+    border:none;
+    font-size:1.6rem;
+    line-height:1;
+    color:var(--pine);
+    cursor:pointer;
+    padding:4px;
+  }
+
+  .cart-items{
+    flex:1;
+    overflow-y:auto;
+    padding:14px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  .cart-empty{
+    text-align:center;
+    color:#7C8B80;
+    padding:40px 10px;
+    font-size:0.95rem;
+  }
+
+  .cart-item{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--sage);
+  }
+
+  .cart-item img{
+    width:64px; height:64px;
+    object-fit:cover;
+    border-radius:10px;
+    flex-shrink:0;
+  }
+
+  .cart-item-info{ flex:1; min-width:0; }
+
+  .cart-item-info h4{ font-size:0.98rem; }
+
+  .cart-item-price{
+    font-size:0.78rem;
+    color:#7C8B80;
+    margin-top:2px;
+  }
+
+  .cart-item-right{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:8px;
+  }
+
+  .cart-item-total{
+    font-weight:700;
+    color:var(--pine);
+    font-size:0.95rem;
+    white-space:nowrap;
+  }
+
+  .remove-btn{
+    background:none;
+    border:none;
+    color:#B5564B;
+    font-size:0.78rem;
+    font-weight:600;
+    cursor:pointer;
+    padding:0;
+    text-decoration:underline;
+  }
+
+  .cart-footer{
+    padding:20px 24px 26px;
+    border-top:1px solid var(--sage);
+  }
+
+  .cart-total-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:16px;
+    font-family:'Fraunces', serif;
+  }
+
+  .cart-total-row span:first-child{
+    font-size:0.95rem;
+    color:#5B6B5F;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+  }
+
+  .cart-total-row span:last-child{
+    font-size:1.5rem;
+    font-weight:700;
+    color:var(--pine);
+  }
+
+  .checkout-btn{
+    width:100%;
+    padding:15px 0;
+    border:none;
+    border-radius:999px;
+    background:var(--leaf);
+    color:var(--white);
+    font-weight:700;
+    font-size:0.98rem;
+    cursor:pointer;
+    transition:background 0.2s ease;
+  }
+
+  .checkout-btn:hover{ background:var(--leaf-light); }
+
+  /* ============================================================
+     ORDER FORM
+     ============================================================ */
+  .order-grid{
+    display:grid;
+    gap:18px;
+    max-width:640px;
+    margin:0 auto;
+  }
+
+  .field-row{
+    display:grid;
+    gap:18px;
+  }
+
+  @media (min-width:560px){
+    .field-row.two{
+      grid-template-columns:1fr 1fr;
+    }
+  }
+
+  label{
+    display:block;
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--pine);
+    margin-bottom:7px;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  textarea{
+    width:100%;
+    padding:13px 14px;
+    border:1.5px solid #DCE6DF;
+    border-radius:10px;
+    background:var(--white);
+    font-family:'Inter', sans-serif;
+    font-size:0.95rem;
+    color:var(--ink);
+    transition:border-color 0.2s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  textarea:focus{
+    border-color:var(--leaf);
+    outline:none;
+  }
+
+  textarea{ resize:vertical; min-height:90px; }
+
+  .order-summary-box{
+    background:var(--sage);
+    border-radius:var(--radius);
+    padding:18px 20px;
+  }
+
+  .order-summary-box h4{
+    font-size:0.95rem;
+    margin-bottom:10px;
+  }
+
+  #orderSummaryPreview{
+    font-size:0.88rem;
+    color:#46594C;
+    white-space:pre-wrap;
+  }
+
+  .order-grid .btn-primary{
+    width:100%;
+    justify-content:center;
+    margin-top:6px;
+  }
+
+  .order-grid .btn-primary:disabled{
+    opacity:0.6;
+    cursor:not-allowed;
+    transform:none;
+  }
+
+  .thank-you{
+    text-align:center;
+    padding:50px 20px;
+    max-width:480px;
+    margin:0 auto;
+  }
+
+  .thank-you .icon{
+    font-size:2.6rem;
+    margin-bottom:14px;
+  }
+
+  .thank-you h3{ margin-bottom:10px; }
+
+  .thank-you p{ color:#5B6B5F; }
+
+  /* ============================================================
+     ABOUT
+     ============================================================ */
+  .about-wrap{
+    display:grid;
+    gap:50px;
+    align-items:center;
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  .about-text h2{
+    font-size:clamp(1.8rem, 4vw, 2.3rem);
+    margin-bottom:18px;
+  }
+
+  .about-text p{
+    color:#46594C;
+    margin-bottom:14px;
+  }
+
+  .about-text p:last-of-type{ margin-bottom:0; }
+
+  .about-media{
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    aspect-ratio:4/3;
+  }
+
+  .about-media img{ width:100%; height:100%; object-fit:cover; }
+
+  @media (max-width:860px){
+    .about-wrap{
+      grid-template-columns:1fr;
+    }
+    .about-media{ order:-1; }
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .site-footer{
+    background:var(--pine);
+    color:rgba(255,255,255,0.85);
+  }
+
+  .footer-inner{
+    display:grid;
+    gap:36px;
+    grid-template-columns:1.3fr 1fr 1fr;
+    padding:60px 24px 30px;
+  }
+
+  .footer-brand .brand-name{ color:var(--white); }
+  .footer-brand .brand-name span{ color:var(--leaf-light); }
+
+  .footer-brand p{
+    margin-top:14px;
+    font-size:0.92rem;
+    color:rgba(255,255,255,0.7);
+    max-width:340px;
+  }
+
+  .footer-col h4{
+    color:var(--white);
+    font-family:'Inter', sans-serif;
+    font-size:0.85rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+
+  .footer-col p, .footer-col a{
+    display:block;
+    text-decoration:none;
+    color:rgba(255,255,255,0.78);
+    font-size:0.92rem;
+    margin-bottom:10px;
+  }
+
+  .footer-col a:hover{ color:var(--white); }
+
+  .whatsapp-link{
+    display:inline-flex !important;
+    align-items:center;
+    gap:8px;
+  }
+
+  .whatsapp-link svg{ width:18px; height:18px; fill:#3DDC84; flex-shrink:0; }
+
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12);
+    padding:18px 24px;
+    text-align:center;
+    font-size:0.8rem;
+    color:rgba(255,255,255,0.55);
+  }
+
+  @media (max-width:760px){
+    .footer-inner{ grid-template-columns:1fr; }
+  }
+
+  /* ============================================================
+     RESPONSIVE NAV
+     ============================================================ */
+  @media (max-width:840px){
+    .nav-toggle{ display:flex; align-items:center; }
+
+    .main-nav{
+      position:absolute;
+      top:100%;
+      left:0; right:0;
+      background:var(--white);
+      flex-direction:column;
+      align-items:flex-start;
+      gap:4px;
+      padding:0 24px;
+      max-height:0;
+      overflow:hidden;
+      box-shadow:0 12px 20px rgba(22,48,31,0.06);
+      transition:max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .main-nav.open{
+      max-height:240px;
+      padding:14px 24px 18px;
+    }
+
+    .main-nav a{ padding:10px 0; width:100%; }
+
+    .site-header{ position:sticky; }
+    .header-inner{ position:relative; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#home" class="brand">
+      <img src="https://i.ibb.co/0yvDRBTd/logo.png" alt="Afzal Greens logo">
+      <span class="brand-name">Afzal Greens<span>Fresh &amp; Local</span></span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <button class="cart-trigger" aria-label="Open basket">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 2H2"/><circle cx="9" cy="20" r="1.5" fill="var(--pine)"/><circle cx="18" cy="20" r="1.5" fill="var(--pine)"/></svg>
+        <span class="cart-badge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="hero-eyebrow">Afzal Greens · Islamabad &amp; Rawalpindi</span>
+    <h1>Cut at dawn. On your counter by noon.</h1>
+    <p>Premium kale, basil, rocket, lettuce and herbs — grown with care and delivered fresh to homes, restaurants and supermarkets.</p>
+    <a href="#products" class="btn btn-primary">
+      Shop Fresh Greens
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- Signature scalloped leaf-edge divider -->
+<div class="scallop" aria-hidden="true">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path fill="var(--canvas)" d="M0,40 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 Z"/>
+  </svg>
+</div>
+
+<!-- ============================================================
+     PRODUCTS
+     ============================================================ -->
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">This Week's Harvest</span>
+      <h2>Fresh greens &amp; herbs</h2>
+      <p>Every bunch is cut to order. Choose your quantity, add it to your basket, and we'll do the rest.</p>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+      <!-- Product cards are generated by JavaScript from the `products` array -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ORDER FORM
+     ============================================================ -->
+<section class="section alt" id="order">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Almost there</span>
+      <h2>Place your order</h2>
+      <p>Add items to your basket, then fill in your details below. We'll confirm everything over WhatsApp before delivery.</p>
+    </div>
+
+    <form class="order-grid" id="orderForm" action="https://formspree.io/f/xkoapvwq" method="POST">
+
+      <div class="field-row two">
+        <div>
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" name="Full Name" required placeholder="Your name">
+        </div>
+        <div>
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="Phone Number" required placeholder="03XX XXXXXXX">
+        </div>
+      </div>
+
+      <div>
+        <label for="address">Delivery Address *</label>
+        <textarea id="address" name="Delivery Address" required placeholder="House #, street, area, Islamabad"></textarea>
+      </div>
+
+      <div class="field-row two">
+        <div>
+          <label for="deliveryTime">Preferred Delivery Date / Time</label>
+          <input type="text" id="deliveryTime" name="Preferred Delivery" placeholder="e.g. Tomorrow, 10am–12pm">
+        </div>
+        <div>
+          <label for="notes">Additional Notes</label>
+          <input type="text" id="notes" name="Additional Notes" placeholder="Optional">
+        </div>
+      </div>
+
+      <div class="order-summary-box">
+        <h4>Your basket</h4>
+        <div id="orderSummaryPreview">Your basket is empty.</div>
+      </div>
+
+      <!-- Hidden fields auto-filled with cart contents before submission -->
+      <textarea name="Order Summary" id="orderSummary" hidden></textarea>
+      <input type="hidden" name="Order Total" id="orderTotal">
+      <input type="hidden" name="_subject" value="New order — Afzal Greens">
+
+      <button type="submit" class="btn btn-primary">Place Order</button>
+    </form>
+
+    <div class="thank-you" id="thankYou" hidden>
+      <div class="icon">🌿</div>
+      <h3>Thanks, your order is in!</h3>
+      <p>We've received your order and will reach out on WhatsApp shortly to confirm delivery details. See you soon!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-wrap">
+      <div class="about-text">
+        <span class="kicker" style="display:block;margin-bottom:10px;">Our Story</span>
+        <h2>From a family plot to your plate</h2>
+        <p>Afzal Greens began as a small family field on the edge of Rawalpindi, growing vegetables the way our elders always have — with patience and care for the soil.</p>
+        <p>As demand grew from restaurants and supermarkets for genuinely fresh greens, we replanted our fields around kale, rocket, basil and salad leaves — crops that reward speed from soil to table.</p>
+        <p>Today we harvest every morning for kitchens and homes across Islamabad &amp; Rawalpindi, so what arrives at your door still tastes like it was picked an hour ago. Because, mostly, it was.</p>
+      </div>
+      <div class="about-media">
+        <img src="https://i.ibb.co/svGkgBR5/banner.jpg" alt="Fresh greens from Afzal Greens farm">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Signature scalloped divider, flipped for the footer -->
+<div class="scallop" aria-hidden="true" style="transform:rotate(180deg);">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+    <path fill="var(--pine)" d="M0,40 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 a50,40 0 0 1 100,0 Z"/>
+  </svg>
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-name">Afzal Greens<span>Fresh &amp; Local</span></span>
+      <p>Premium fresh greens, herbs and salad leaves, hand-picked daily and delivered across Islamabad &amp; Rawalpindi.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>📞 0345 6785938</p>
+      <a class="whatsapp-link" href="https://wa.me/923456785938" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.94.55 3.75 1.5 5.29L2 22l4.96-1.58a9.9 9.9 0 0 0 5.08 1.39h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.78 14.05c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.78-4.17-4.93-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.74-2.12 1-2.41.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 1.99.88 2.13.07.14.12.31.02.5-.1.19-.15.3-.29.46-.14.16-.3.36-.43.48-.14.13-.29.27-.13.55.17.29.76 1.25 1.63 2.02 1.13 1 2.08 1.32 2.38 1.46.3.14.47.12.65-.05.18-.18.74-.85.94-1.15.2-.29.4-.24.67-.14.27.1 1.71.81 2 .96.29.14.48.21.55.33.07.13.07.71-.17 1.39z"/></svg>
+        0345 6785938
+      </a>
+      <p style="margin-top:6px;">🚚 Delivering across Islamabad</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About Us</a>
+      <a href="#order">Place an Order</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; <span id="year"></span> Afzal Greens. All rights reserved.
+  </div>
+</footer>
+
+<!-- ============================================================
+     FLOATING CART + DRAWER
+     ============================================================ -->
+<button class="floating-cart cart-trigger" aria-label="Open basket">
+  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 2H2"/><circle cx="9" cy="20" r="1.5" fill="white"/><circle cx="18" cy="20" r="1.5" fill="white"/></svg>
+  <span class="cart-badge">0</span>
+</button>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping basket">
+  <div class="cart-header">
+    <h2>Your Basket</h2>
+    <button class="cart-close" id="closeCart" aria-label="Close basket">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">Your basket is empty. Add some fresh greens!</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cartTotal">Rs. 0</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast">Added to basket</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+  /* ==========================================================
+     PRODUCT CATALOGUE — the single source of truth.
+     To add, edit or remove a product, just edit this array.
+     Each product needs:
+       id          unique number
+       name        product name
+       unit        e.g. "per bunch", "per kg", "per box"
+       description short marketing description
+       price       price in PKR (whole number, no commas)
+       image       image URL (use ibb.co "direct image" links)
+     The product grid below is built entirely from this array.
+     ========================================================== */
+  const products = [
+    {
+      id: 1,
+      name: "Kale",
+      unit: "per bunch",
+      description: "Deep green, crinkled leaves with a hearty bite — perfect for salads, sautés and green smoothies.",
+      price: 100,
+      image: "https://i.ibb.co/sdqRm4d1/pexels-karola-g-4963545.jpg"
+    },
+    {
+      id: 2,
+      name: "Basil",
+      unit: "per bunch",
+      description: "Fragrant, Genovese-style basil leaves, picked fresh for pestos, pizzas and garnishes.",
+      price: 100,
+      image: "https://i.ibb.co/4Z0HjvrB/Screenshot-2026-06-15-224736.jpg"
+    },
+    {
+      id: 3,
+      name: "Iceberg Lettuce",
+      unit: "per kg",
+      description: "Crisp, pale-green heads with a satisfying crunch — the backbone of salads, burgers and wraps.",
+      price: 500,
+      image: "https://i.ibb.co/35XzNDw9/Screenshot-2026-06-15-225518.jpg"
+    },
+    {
+      id: 4,
+      name: "Rocket (Arugula)",
+      unit: "per bunch",
+      description: "Peppery, tender leaves that bring a sharp, fresh bite to salads and plated mains.",
+      price: 90,
+      image: "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 5,
+      name: "Baby Spinach",
+      unit: "per bunch",
+      description: "Soft, mild leaves packed with iron — delicious raw, blended or lightly wilted.",
+      price: 110,
+      image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 6,
+      name: "Fresh Mint",
+      unit: "per bunch",
+      description: "Cool, aromatic mint leaves for chutneys, teas and refreshing garnishes.",
+      price: 60,
+      image: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 7,
+      name: "Coriander (Dhania)",
+      unit: "per bunch",
+      description: "Bright, citrusy coriander — an everyday kitchen staple for curries, chutneys and garnish.",
+      price: 50,
+      image: "https://images.unsplash.com/photo-1606914469165-58e6e80a0bb0?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 8,
+      name: "Chef's Salad Mix",
+      unit: "per box",
+      description: "A ready-to-toss blend of rocket, baby spinach and lettuce, hand-mixed for busy kitchens.",
+      price: 350,
+      image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80"
+    }
+  ];
+
+  /* ==========================================================
+     CART STATE
+     The cart is a simple object: { productId: quantity }
+     ========================================================== */
+  let cart = {};
+
+  // ---- DOM references ----
+  const productGrid   = document.getElementById('productGrid');
+  const cartItemsEl   = document.getElementById('cartItems');
+  const cartTotalEl   = document.getElementById('cartTotal');
+  const cartDrawer    = document.getElementById('cartDrawer');
+  const cartOverlay   = document.getElementById('cartOverlay');
+  const toast         = document.getElementById('toast');
+  const orderForm     = document.getElementById('orderForm');
+  const orderSummary  = document.getElementById('orderSummary');
+  const orderTotal    = document.getElementById('orderTotal');
+  const summaryPreview= document.getElementById('orderSummaryPreview');
+  const thankYou      = document.getElementById('thankYou');
+
+  // Format a number as Pakistani Rupees, e.g. 1500 -> "Rs. 1,500"
+  function formatPrice(n){
+    return 'Rs. ' + n.toLocaleString('en-PK');
+  }
+
+  /* ----------------------------------------------------------
+     RENDER PRODUCT GRID
+     Builds one card per item in the `products` array.
+     ---------------------------------------------------------- */
+  function renderProducts(){
+    productGrid.innerHTML = products.map(p => `
+      <article class="product-card">
+        <div class="product-media">
+          <img src="${p.image}" alt="${p.name}" loading="lazy">
+          <span class="harvest-tag">Picked<br>Today</span>
+        </div>
+        <div class="product-body">
+          <h3>${p.name}</h3>
+          <p class="unit">${p.unit}</p>
+          <p class="desc">${p.description}</p>
+          <p class="price">${formatPrice(p.price)}</p>
+          <div class="qty-row">
+            <button class="qty-btn" type="button" data-action="minus" data-id="${p.id}" aria-label="Decrease quantity">−</button>
+            <input class="qty-input" type="number" min="1" value="1" data-id="${p.id}" aria-label="Quantity for ${p.name}">
+            <button class="qty-btn" type="button" data-action="plus" data-id="${p.id}" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="add-cart-btn" type="button" data-id="${p.id}">Add to Cart</button>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  // Quantity steppers + Add to Cart, handled with one listener (event delegation)
+  productGrid.addEventListener('click', (e) => {
+    const target = e.target;
+
+    // Plus / minus steppers on a product card
+    if(target.classList.contains('qty-btn')){
+      const input = productGrid.querySelector(`.qty-input[data-id="${target.dataset.id}"]`);
+      let val = parseInt(input.value) || 1;
+      if(target.dataset.action === 'plus') val += 1;
+      else val = Math.max(1, val - 1);
+      input.value = val;
+    }
+
+    // Add to Cart
+    if(target.classList.contains('add-cart-btn')){
+      const id = parseInt(target.dataset.id);
+      const input = productGrid.querySelector(`.qty-input[data-id="${id}"]`);
+      const qty = Math.max(1, parseInt(input.value) || 1);
+
+      cart[id] = (cart[id] || 0) + qty;
+      renderCart();
+
+      // micro-feedback: button bounce + toast
+      target.classList.add('added');
+      setTimeout(() => target.classList.remove('added'), 600);
+      showToast(`Added ${qty} × ${products.find(p => p.id === id).name} to basket`);
+    }
+  });
+
+  // Keep manually-typed quantities valid (whole numbers, minimum 1)
+  productGrid.addEventListener('change', (e) => {
+    if(e.target.classList.contains('qty-input')){
+      let v = parseInt(e.target.value);
+      if(isNaN(v) || v < 1) v = 1;
+      e.target.value = v;
+    }
+  });
+
+  /* ----------------------------------------------------------
+     TOAST NOTIFICATION
+     ---------------------------------------------------------- */
+  let toastTimer;
+  function showToast(message){
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  /* ----------------------------------------------------------
+     RENDER CART (drawer contents, badge counts, order preview)
+     ---------------------------------------------------------- */
+  function renderCart(){
+    const ids = Object.keys(cart).filter(id => cart[id] > 0);
+    let total = 0;
+    let count = 0;
+
+    if(ids.length === 0){
+      cartItemsEl.innerHTML = '<p class="cart-empty">Your basket is empty. Add some fresh greens!</p>';
+    } else {
+      cartItemsEl.innerHTML = ids.map(id => {
+        const p = products.find(pr => pr.id === parseInt(id));
+        const qty = cart[id];
+        const lineTotal = p.price * qty;
+        total += lineTotal;
+        count += qty;
+        return `
+          <div class="cart-item">
+            <img src="${p.image}" alt="${p.name}">
+            <div class="cart-item-info">
+              <h4>${p.name}</h4>
+              <p class="cart-item-price">${formatPrice(p.price)} · ${p.unit}</p>
+              <div class="qty-row small">
+                <button class="qty-btn" type="button" data-action="minus" data-cart-id="${id}" aria-label="Decrease quantity">−</button>
+                <input class="qty-input" type="number" min="1" value="${qty}" data-cart-id="${id}" aria-label="Quantity for ${p.name}">
+                <button class="qty-btn" type="button" data-action="plus" data-cart-id="${id}" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+            <div class="cart-item-right">
+              <span class="cart-item-total">${formatPrice(lineTotal)}</span>
+              <button class="remove-btn" type="button" data-cart-id="${id}">Remove</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    cartTotalEl.textContent = formatPrice(total);
+
+    // Update every cart badge (header + floating button)
+    document.querySelectorAll('.cart-badge').forEach(b => b.textContent = count);
+
+    // Update the order-form basket preview
+    updateOrderSummaryPreview(ids, total);
+  }
+
+  // Quantity changes & removals inside the cart drawer
+  cartItemsEl.addEventListener('click', (e) => {
+    const t = e.target;
+    const id = t.dataset.cartId;
+    if(!id) return;
+
+    if(t.classList.contains('qty-btn')){
+      if(t.dataset.action === 'plus'){
+        cart[id] += 1;
+      } else {
+        cart[id] -= 1;
+        if(cart[id] <= 0) delete cart[id];
+      }
+      renderCart();
+    }
+
+    if(t.classList.contains('remove-btn')){
+      delete cart[id];
+      renderCart();
+    }
+  });
+
+  cartItemsEl.addEventListener('change', (e) => {
+    if(e.target.classList.contains('qty-input')){
+      const id = e.target.dataset.cartId;
+      let v = parseInt(e.target.value);
+      if(isNaN(v) || v < 1){
+        delete cart[id];
+      } else {
+        cart[id] = v;
+      }
+      renderCart();
+    }
+  });
+
+  /* ----------------------------------------------------------
+     CART DRAWER OPEN / CLOSE
+     ---------------------------------------------------------- */
+  function openCart(){
+    cartDrawer.classList.add('open');
+    cartOverlay.classList.add('show');
+  }
+  function closeCart(){
+    cartDrawer.classList.remove('open');
+    cartOverlay.classList.remove('show');
+  }
+
+  document.querySelectorAll('.cart-trigger').forEach(btn => btn.addEventListener('click', openCart));
+  document.getElementById('closeCart').addEventListener('click', closeCart);
+  cartOverlay.addEventListener('click', closeCart);
+
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    closeCart();
+    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  /* ----------------------------------------------------------
+     ORDER SUMMARY (preview box + hidden form fields)
+     ---------------------------------------------------------- */
+  function buildSummary(){
+    const ids = Object.keys(cart).filter(id => cart[id] > 0);
+    let lines = [];
+    let total = 0;
+
+    ids.forEach(id => {
+      const p = products.find(pr => pr.id === parseInt(id));
+      const qty = cart[id];
+      const lineTotal = p.price * qty;
+      total += lineTotal;
+      lines.push(`${p.name} (${p.unit}) × ${qty} = ${formatPrice(lineTotal)}`);
+    });
+
+    return { ids, lines, total };
+  }
+
+  function updateOrderSummaryPreview(ids, total){
+    if(ids.length === 0){
+      summaryPreview.textContent = 'Your basket is empty.';
+      return;
+    }
+    const { lines } = buildSummary();
+    summaryPreview.textContent = lines.join('\n') + `\n\nGrand Total: ${formatPrice(total)}`;
+  }
+
+  /* ----------------------------------------------------------
+     ORDER FORM SUBMISSION
+     Sends order details + a formatted basket summary to Formspree.
+     Shows a friendly thank-you message without redirecting.
+     ---------------------------------------------------------- */
+  orderForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const { ids, lines, total } = buildSummary();
+
+    if(ids.length === 0){
+      alert('Your basket is empty. Please add some products before placing an order.');
+      return;
+    }
+
+    // Fill the hidden fields with the basket summary + total
+    orderSummary.value = lines.join('\n') + `\n\nGrand Total: ${formatPrice(total)}`;
+    orderTotal.value = formatPrice(total);
+
+    const submitBtn = orderForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Placing order...';
+
+    try {
+      const formData = new FormData(orderForm);
+      const response = await fetch(orderForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if(response.ok){
+        orderForm.hidden = true;
+        thankYou.hidden = false;
+        thankYou.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Empty the basket after a successful order
+        cart = {};
+        renderCart();
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (err) {
+      alert("Sorry, we couldn't send your order. Please check your connection and try again, or message us directly on WhatsApp.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Place Order';
+    }
+  });
+
+  /* ----------------------------------------------------------
+     MOBILE NAVIGATION TOGGLE
+     ---------------------------------------------------------- */
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('mainNav').classList.toggle('open');
+  });
+
+  // Close mobile nav after tapping a link
+  document.querySelectorAll('#mainNav a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('mainNav').classList.remove('open'));
+  });
+
+  /* ----------------------------------------------------------
+     FOOTER YEAR
+     ---------------------------------------------------------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ----------------------------------------------------------
+     INITIAL RENDER
+     ---------------------------------------------------------- */
+  renderProducts();
+  renderCart();
+</script>
+
+</body>
+</html>
